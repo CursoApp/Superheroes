@@ -1,27 +1,23 @@
 package com.example.superheroes.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.superheroesapp.R
-import com.example.superheroesapp.adapters.SuperheroAdapter
-import com.example.superheroesapp.data.SuperheroApiService
-import com.example.superheroesapp.databinding.ActivityMainBinding
+import com.example.superheroes.adapters.SuperheroAdapter
+import com.example.superheroes.data.SuperheroesApiService
+import com.example.superheroes.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    lateinit var adapter: SuperheroAdapter
+    private lateinit var adapter: SuperheroAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         // Llamada en segundo plano
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = getRetrofit().create(SuperheroApiService::class.java)
+                val apiService = getRetrofit().create(SuperheroesApiService::class.java)
                 val result = apiService.findSuperheroesByName(query)
 
                 runOnUiThread {

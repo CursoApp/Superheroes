@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,28 +11,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="16dp">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+                <!-- Esto es pa ra cada imagen de cada super heroe-->
             <ImageView
                 android:id="@+id/avatarImageView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
 
+                <!--TextView de abajo es el codigo para los nombres de los superheroes-->
             <TextView
                 android:id="@+id/nameTextView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
                 android:text="SUPERMAN"
+                android:textSize="24sp"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:background="@color/transparent_grey"/>
+
 
         </FrameLayout>
 
+
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="VISITAR >>>"
+        android:textSize="15sp"
+        android:backgroundTint="@color/Azulete"
+        android:shadowDx="@integer/material_motion_duration_long_2"
+        android:shadowRadius="@integer/material_motion_duration_short_2"/>
+</LinearLayout>
 
 <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
