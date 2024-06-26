@@ -27,7 +27,7 @@
                 <!--TextView de abajo es el codigo para los nombres de los superheroes-->
             <TextView
                 android:id="@+id/nameTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="SUPERMAN"
@@ -42,18 +42,28 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:layout_width="150dp"
+    <!-- Lo de abajo está hecho por mi
+    para agregar el rótulo de "SEGUIR"-->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VISITAR >>>"
-        android:textSize="15sp"
-        android:backgroundTint="@color/Azulete"
-        android:shadowDx="@integer/material_motion_duration_long_2"
-        android:shadowRadius="@integer/material_motion_duration_short_2"/>
+        android:clipChildren="true"
+        android:paddingStart="30dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*** ENTRAR ***"
+            android:textSize="15sp"
+            android:backgroundTint="@color/Azulete"
+            android:shadowDx="@integer/material_motion_duration_long_2"
+            android:shadowRadius="@integer/material_motion_duration_short_2"/>
+
+    </FrameLayout>
 </LinearLayout>
 
 <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout> -->

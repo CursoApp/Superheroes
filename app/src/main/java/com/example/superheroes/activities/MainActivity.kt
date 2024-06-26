@@ -1,9 +1,14 @@
 package com.example.superheroes.activities
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.superheroes.R
 import com.example.superheroes.adapters.SuperheroAdapter
+import com.example.superheroes.data.Superhero
 import com.example.superheroes.data.SuperheroesApiService
 import com.example.superheroes.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -19,19 +24,50 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: SuperheroAdapter
 
+    private lateinit var superheroList: List<Superhero>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = SuperheroAdapter()
+        superheroList = emptyList() //Esto es para que te pase una lista vacía.
+
+        adapter = SuperheroAdapter() {
+            Log.i("EUREKA", "Click en la posicion: $it")
+        }
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-        searchByName("super")
+        searchByName("n")
     }
+
+    //Esto TAMBIEN Está en HOROSCOPO
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
+
+        val searchViewItem = menu.findItem(R.id.menu_search)
+        val searchView = searchViewItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchByName(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
+        return true
+    }
+
 
     private fun searchByName(query: String){
         // Llamada en segundo plano
