@@ -1,7 +1,7 @@
 package com.example.superheroes.activities
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var superheroList: List<Superhero>
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,17 +36,31 @@ class MainActivity : AppCompatActivity() {
 
         superheroList = emptyList() //Esto es para que te pase una lista vacía.
 
-        adapter = SuperheroAdapter() {
-            Log.i("EUREKA", "Click en la posicion: $it")
-        }
+    // Desde aquí .... Copiado desde HOROSCOPO,
 
+        adapter = SuperheroAdapter(superheroList) { position ->
+            navigateToDetail(superheroList[position])
+        }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         searchByName("n")
     }
+        //  ANTIGUO de arriba (p38): recyclerView.layoutManager = GridLayoutManager(this, 2)
+            /*Log.i("EUREKA", "Click en la posicion: $it")
+            binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)*/
 
-    //Esto TAMBIEN Está en HOROSCOPO
+
+    private fun navigateToDetail(superhero: Superhero) {
+        val intent: Intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_SUPERHERO_ID, superhero.id)
+        startActivity(intent)
+    }
+
+
+    //Esto de abajo, TAMBIEN Está en HOROSCOPO es el código para añadir
+    // la LUPA en la barra de busqueda de la APP.
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_activity_main, menu)
@@ -77,7 +93,12 @@ class MainActivity : AppCompatActivity() {
                 val result = apiService.findSuperheroesByName(query)
 
                 runOnUiThread {
+                    superheroList = result.results //<--- Este codigo es para que ___ llame a la lista
                     adapter.updateData(result.results)
+                //Si añado este codigopuedo cambiar al primer heroe a mi nombre o
+                // mostrar solo los q tienen "bo" en su nombre:
+                    //superheroList.first().name = "Orlando"
+                    //superheroList = superheroList.filter { it.name.contains("bo") }
                 }
                 //Log.i("HTTP", "${result.results}")
             } catch (e: Exception) {

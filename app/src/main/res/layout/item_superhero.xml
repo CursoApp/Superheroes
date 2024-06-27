@@ -43,7 +43,7 @@
     </androidx.cardview.widget.CardView>
 
     <!-- Lo de abajo está hecho por mi
-    para agregar el rótulo de "SEGUIR"-->
+    para agregar el rótulo de "SEGUIR"
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:shadowDx="@integer/material_motion_duration_long_2"
             android:shadowRadius="@integer/material_motion_duration_short_2"/>
 
-    </FrameLayout>
+    </FrameLayout>-->
 </LinearLayout>
 
 <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

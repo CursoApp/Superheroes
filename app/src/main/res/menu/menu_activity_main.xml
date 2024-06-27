@@ -10,3 +10,5 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
 </menu>
+
+<!--Esto de arriba es para añadir el ICONO de la lupa "search" en la cabecera de la APP. -->
